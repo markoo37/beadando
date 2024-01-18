@@ -72,6 +72,7 @@
             // 
             this.passwordBox.Location = new System.Drawing.Point(91, 128);
             this.passwordBox.Name = "passwordBox";
+            this.passwordBox.PasswordChar = '*';
             this.passwordBox.Size = new System.Drawing.Size(100, 23);
             this.passwordBox.TabIndex = 1;
             // 
@@ -159,6 +160,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Info;
             this.ClientSize = new System.Drawing.Size(288, 280);
             this.Controls.Add(this.infoOfWindow);
             this.Controls.Add(this.closeButton);

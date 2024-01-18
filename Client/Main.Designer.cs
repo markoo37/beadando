@@ -29,8 +29,9 @@
         private void InitializeComponent()
         {
             this.gameButton = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.numberBox = new System.Windows.Forms.ComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.gameResetButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.no9 = new System.Windows.Forms.Label();
@@ -51,25 +52,33 @@
             this.usersData = new System.Windows.Forms.DataGridView();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.gyozelmek = new System.Windows.Forms.Label();
             this.registrationButton = new System.Windows.Forms.Button();
+            this.adminLabel = new System.Windows.Forms.Label();
+            this.deleteUser = new System.Windows.Forms.Button();
+            this.hufLabel = new System.Windows.Forms.Label();
+            this.successLabel = new System.Windows.Forms.Label();
+            this.lossLabel = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.usersData)).BeginInit();
             this.SuspendLayout();
             // 
             // gameButton
             // 
-            this.gameButton.Location = new System.Drawing.Point(83, 352);
+            this.gameButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.gameButton.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.gameButton.Location = new System.Drawing.Point(83, 321);
             this.gameButton.Name = "gameButton";
-            this.gameButton.Size = new System.Drawing.Size(121, 23);
+            this.gameButton.Size = new System.Drawing.Size(121, 54);
             this.gameButton.TabIndex = 0;
-            this.gameButton.Text = "játék";
-            this.gameButton.UseVisualStyleBackColor = true;
+            this.gameButton.Text = "JÁTÉK";
+            this.gameButton.UseVisualStyleBackColor = false;
+            this.gameButton.Click += new System.EventHandler(this.gameButton_Click);
             // 
-            // comboBox1
+            // numberBox
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.numberBox.FormattingEnabled = true;
+            this.numberBox.Items.AddRange(new object[] {
             "1",
             "2",
             "3",
@@ -79,14 +88,19 @@
             "7",
             "8",
             "9"});
-            this.comboBox1.Location = new System.Drawing.Point(83, 309);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 23);
-            this.comboBox1.TabIndex = 1;
-            this.comboBox1.Text = "Számok";
+            this.numberBox.Location = new System.Drawing.Point(83, 292);
+            this.numberBox.Name = "numberBox";
+            this.numberBox.Size = new System.Drawing.Size(121, 23);
+            this.numberBox.TabIndex = 1;
+            this.numberBox.Text = "Számok";
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.Gold;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.lossLabel);
+            this.panel1.Controls.Add(this.successLabel);
+            this.panel1.Controls.Add(this.gameResetButton);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.no9);
@@ -98,12 +112,22 @@
             this.panel1.Controls.Add(this.no3);
             this.panel1.Controls.Add(this.no2);
             this.panel1.Controls.Add(this.no1);
-            this.panel1.Controls.Add(this.comboBox1);
+            this.panel1.Controls.Add(this.numberBox);
             this.panel1.Controls.Add(this.gameButton);
             this.panel1.Location = new System.Drawing.Point(230, 12);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(290, 413);
             this.panel1.TabIndex = 2;
+            // 
+            // gameResetButton
+            // 
+            this.gameResetButton.Location = new System.Drawing.Point(83, 381);
+            this.gameResetButton.Name = "gameResetButton";
+            this.gameResetButton.Size = new System.Drawing.Size(121, 23);
+            this.gameResetButton.TabIndex = 13;
+            this.gameResetButton.Text = "próbáld újra";
+            this.gameResetButton.UseVisualStyleBackColor = true;
+            this.gameResetButton.Click += new System.EventHandler(this.gameResetButton_Click);
             // 
             // label2
             // 
@@ -247,8 +271,10 @@
             // balanceLabel
             // 
             this.balanceLabel.AutoSize = true;
+            this.balanceLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.balanceLabel.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.balanceLabel.Location = new System.Drawing.Point(12, 12);
+            this.balanceLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.balanceLabel.Location = new System.Drawing.Point(61, 15);
             this.balanceLabel.Name = "balanceLabel";
             this.balanceLabel.Size = new System.Drawing.Size(33, 45);
             this.balanceLabel.TabIndex = 4;
@@ -277,12 +303,16 @@
             // 
             // uploadMoney
             // 
-            this.uploadMoney.Location = new System.Drawing.Point(23, 79);
+            this.uploadMoney.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.uploadMoney.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.uploadMoney.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.uploadMoney.ForeColor = System.Drawing.Color.Black;
+            this.uploadMoney.Location = new System.Drawing.Point(61, 63);
             this.uploadMoney.Name = "uploadMoney";
-            this.uploadMoney.Size = new System.Drawing.Size(75, 23);
+            this.uploadMoney.Size = new System.Drawing.Size(105, 38);
             this.uploadMoney.TabIndex = 7;
             this.uploadMoney.Text = "Feltöltés";
-            this.uploadMoney.UseVisualStyleBackColor = true;
+            this.uploadMoney.UseVisualStyleBackColor = false;
             this.uploadMoney.Click += new System.EventHandler(this.uploadMoney_Click);
             // 
             // loginButton
@@ -298,20 +328,21 @@
             // usersData
             // 
             this.usersData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.usersData.Location = new System.Drawing.Point(556, 165);
+            this.usersData.Location = new System.Drawing.Point(570, 165);
             this.usersData.Name = "usersData";
             this.usersData.RowTemplate.Height = 25;
-            this.usersData.Size = new System.Drawing.Size(545, 257);
+            this.usersData.Size = new System.Drawing.Size(428, 257);
             this.usersData.TabIndex = 9;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(809, 147);
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label3.Location = new System.Drawing.Point(758, 147);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(50, 15);
+            this.label3.Size = new System.Drawing.Size(57, 15);
             this.label3.TabIndex = 10;
-            this.label3.Text = "Rangsor";
+            this.label3.Text = "Ranglista";
             // 
             // label4
             // 
@@ -323,18 +354,20 @@
             this.label4.TabIndex = 11;
             this.label4.Text = "Bejelentkezve mint:";
             // 
-            // label5
+            // gyozelmek
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(598, 63);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(90, 21);
-            this.label5.TabIndex = 12;
-            this.label5.Text = "Győzelmek:";
+            this.gyozelmek.AutoSize = true;
+            this.gyozelmek.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.gyozelmek.Location = new System.Drawing.Point(598, 63);
+            this.gyozelmek.Name = "gyozelmek";
+            this.gyozelmek.Size = new System.Drawing.Size(90, 21);
+            this.gyozelmek.TabIndex = 12;
+            this.gyozelmek.Text = "Győzelmek:";
             // 
             // registrationButton
             // 
+            this.registrationButton.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveBorder;
+            this.registrationButton.FlatAppearance.BorderSize = 3;
             this.registrationButton.Location = new System.Drawing.Point(33, 334);
             this.registrationButton.Name = "registrationButton";
             this.registrationButton.Size = new System.Drawing.Size(91, 23);
@@ -343,13 +376,87 @@
             this.registrationButton.UseVisualStyleBackColor = true;
             this.registrationButton.Click += new System.EventHandler(this.registrationButton_Click);
             // 
+            // adminLabel
+            // 
+            this.adminLabel.AutoSize = true;
+            this.adminLabel.BackColor = System.Drawing.Color.Black;
+            this.adminLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.adminLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.adminLabel.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.adminLabel.ForeColor = System.Drawing.Color.Transparent;
+            this.adminLabel.Location = new System.Drawing.Point(101, 166);
+            this.adminLabel.Name = "adminLabel";
+            this.adminLabel.Size = new System.Drawing.Size(435, 52);
+            this.adminLabel.TabIndex = 15;
+            this.adminLabel.Text = "ADMIN CONTROL PANEL";
+            this.adminLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.adminLabel.Visible = false;
+            // 
+            // deleteUser
+            // 
+            this.deleteUser.BackColor = System.Drawing.Color.Red;
+            this.deleteUser.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.deleteUser.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.deleteUser.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.deleteUser.ForeColor = System.Drawing.Color.White;
+            this.deleteUser.Location = new System.Drawing.Point(731, 112);
+            this.deleteUser.Name = "deleteUser";
+            this.deleteUser.Size = new System.Drawing.Size(109, 32);
+            this.deleteUser.TabIndex = 16;
+            this.deleteUser.Text = "BAN USER";
+            this.deleteUser.UseVisualStyleBackColor = false;
+            this.deleteUser.Visible = false;
+            this.deleteUser.Click += new System.EventHandler(this.deleteUser_Click);
+            // 
+            // hufLabel
+            // 
+            this.hufLabel.AutoSize = true;
+            this.hufLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.hufLabel.Location = new System.Drawing.Point(1, 28);
+            this.hufLabel.Name = "hufLabel";
+            this.hufLabel.Size = new System.Drawing.Size(54, 25);
+            this.hufLabel.TabIndex = 17;
+            this.hufLabel.Text = "HUF:";
+            // 
+            // successLabel
+            // 
+            this.successLabel.AutoSize = true;
+            this.successLabel.BackColor = System.Drawing.Color.DimGray;
+            this.successLabel.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.successLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.successLabel.Location = new System.Drawing.Point(95, 101);
+            this.successLabel.Name = "successLabel";
+            this.successLabel.Size = new System.Drawing.Size(93, 30);
+            this.successLabel.TabIndex = 14;
+            this.successLabel.Text = "Nyertél!";
+            this.successLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.successLabel.Visible = false;
+            // 
+            // lossLabel
+            // 
+            this.lossLabel.AutoSize = true;
+            this.lossLabel.BackColor = System.Drawing.Color.DimGray;
+            this.lossLabel.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lossLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.lossLabel.Location = new System.Drawing.Point(83, 101);
+            this.lossLabel.Name = "lossLabel";
+            this.lossLabel.Size = new System.Drawing.Size(115, 30);
+            this.lossLabel.TabIndex = 15;
+            this.lossLabel.Text = "Vesztettél!";
+            this.lossLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lossLabel.Visible = false;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1158, 450);
+            this.BackColor = System.Drawing.Color.SeaShell;
+            this.ClientSize = new System.Drawing.Size(1028, 450);
+            this.Controls.Add(this.hufLabel);
+            this.Controls.Add(this.deleteUser);
+            this.Controls.Add(this.adminLabel);
             this.Controls.Add(this.registrationButton);
-            this.Controls.Add(this.label5);
+            this.Controls.Add(this.gyozelmek);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.usersData);
@@ -374,7 +481,7 @@
         #endregion
 
         private Button gameButton;
-        private ComboBox comboBox1;
+        private ComboBox numberBox;
         private Panel panel1;
         private Label no9;
         private Label no8;
@@ -396,7 +503,13 @@
         private DataGridView usersData;
         private Label label3;
         private Label label4;
-        private Label label5;
+        private Label gyozelmek;
         private Button registrationButton;
+        private Button gameResetButton;
+        private Label adminLabel;
+        private Button deleteUser;
+        private Label hufLabel;
+        private Label successLabel;
+        private Label lossLabel;
     }
 }

@@ -95,6 +95,7 @@ namespace Client
                     
                     break;
                 case RequestType.DELETE:
+                    DeleteUser();
                     break;
                 case RequestType.LOGIN:
                     LoginUser();
@@ -106,13 +107,94 @@ namespace Client
             }
         }
 
+        private List<User> CheckCurrentUsers()
+        {
+            RestRequest request = new RestRequest();
+            try
+            {
+                RestResponse response = restClient.Get(request);
+                if (response.StatusCode != System.Net.HttpStatusCode.OK)
+                {
+                    MessageBox.Show(response.StatusDescription);
+                }
+                else
+                {
+                    Response res = restClient.Deserialize<Response>(response).Data;
+                    List<User> users = res.Users.Where(x => x.ID != 2).ToList();
+                    return users;
+                }
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
+            return new List<User>();
+        }
+
+
+        private void DeleteUser()
+        {
+            //List<User> currentUsers = CheckCurrentUsers();
+
+            //if (currentUsers.Count == 0)
+            //{
+            //    MessageBox.Show("No users to delete!");
+            //    return;
+            //}
+
+            //List<User> correctUser = currentUsers.Where(x => x.username == usernameBox.Text && x.ID == int.Parse(idBox.Text)).ToList();
+            //User user = correctUser.First();
+
+            RestRequest request = new RestRequest();
+            request.AddBody(new
+            {
+                id = idBox.Text,
+                username = usernameBox.Text,
+            });
+            try
+            {
+                RestResponse response = restClient.Delete(request);
+                if (response.StatusCode != System.Net.HttpStatusCode.OK)
+                {
+                    MessageBox.Show(response.StatusDescription);
+                }
+                else
+                {
+                    Response res = restClient.Deserialize<Response>(response).Data;
+                    if (res.error == 0)
+                    {
+                        
+
+                        mainForm.RefreshUserData();
+                        mainForm.RefreshLabels(CurrentUser.username);
+                        mainForm.ShowLoggedInUserInfo();
+
+                        MessageBox.Show(res.message);
+
+                        mainForm.ManageButtons(true);
+
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show(res.message);
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
+        }
+
         void LogoutUser()
         {
             CurrentUser.username = null;
             CurrentUser.password = null;
             CurrentUser.balance = 0;
             CurrentUser.how_many_wins = 0;
-            CurrentUser.user_type_id = 0;         
+            CurrentUser.user_type_id = 0;
+            
         }
 
         void AddMoney()
@@ -145,6 +227,7 @@ namespace Client
                         MessageBox.Show(res.message);
                         
                         mainForm.ManageButtons(true);
+                        
                         this.Close();
                     }
                     else
@@ -164,8 +247,13 @@ namespace Client
         void LoginUser()
         {
             RestRequest request = new RestRequest();
-            request.AddParameter("username", usernameBox.Text);
-            request.AddParameter("password", passwordBox.Text);
+            request.AddBody(new
+            {
+                username = usernameBox.Text,
+                password = passwordBox.Text
+            });
+            //request.AddParameter("username", usernameBox.Text);
+            //request.AddParameter("password", passwordBox.Text);
             try
             {
                 RestResponse response = restClient.Get(request);
@@ -188,6 +276,9 @@ namespace Client
                         
                         mainForm.ShowLoggedInUserInfo();
                         mainForm.ManageButtons(true);
+                        mainForm.GameResetButtonVisibility(true);
+                        mainForm.CheckIfAdmin();
+
                         this.Close();
                     }
                     else
